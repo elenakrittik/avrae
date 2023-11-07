@@ -78,11 +78,6 @@ class Avrae(commands.AutoShardedBot):
         self.testing = options.get("testing")
         self.state = "init"
 
-        # dbs
-        self.mclient = motor.motor_asyncio.AsyncIOMotorClient(config.MONGO_URL)
-        self.mdb = self.mclient[config.MONGODB_DB_NAME]
-        self.rdb = self.loop.run_until_complete(self.setup_rdb())
-
         # misc caches
         self.prefixes = dict()
         self.muted = set()
@@ -98,6 +93,12 @@ class Avrae(commands.AutoShardedBot):
                 release = f"avrae-bot@{config.GIT_COMMIT_SHA}"
             sentry_sdk.init(dsn=config.SENTRY_DSN, environment=config.ENVIRONMENT.title(), release=release)
 
+    async def setup_hook(self):
+        # dbs
+        self.mclient = motor.motor_asyncio.AsyncIOMotorClient(config.MONGO_URL)
+        self.mdb = self.mclient[config.MONGODB_DB_NAME]
+        self.rdb = await self.setup_rdb()
+
         # ddb entitlements
         if config.TESTING and config.DDB_AUTH_SERVICE_URL is None:
             self.ddb = BeyondClientBase()
@@ -110,6 +111,11 @@ class Avrae(commands.AutoShardedBot):
         # ddb game log
         self.glclient = GameLogClient(self)
         self.glclient.init()
+
+        for cog in COGS:
+            self.load_extension(cog)
+
+        await compendium.reload_task(bot.mdb)
 
     async def setup_rdb(self):
         return RedisIO(await redis.from_url(url=config.REDIS_URL))
@@ -382,11 +388,7 @@ async def on_command(ctx):
         log.debug("Command in PM with {0.message.author} ({0.message.author.id}): {0.message.content}".format(ctx))
 
 
-for cog in COGS:
-    bot.load_extension(cog)
-
 if __name__ == "__main__":
     faulthandler.enable()  # assumes we log errors to stderr, traces segfaults
     bot.state = "run"
-    bot.loop.create_task(compendium.reload_task(bot.mdb))
     bot.run(config.TOKEN)
