@@ -89,5 +89,5 @@ class PBPUtils(commands.Cog):
         await ctx.send(sqrt(num1**2 + num2**2))
 
 
-def setup(bot):
-    bot.add_cog(PBPUtils(bot))
+async def setup(bot):
+    await bot.add_cog(PBPUtils(bot))

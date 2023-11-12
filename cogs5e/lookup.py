@@ -1184,5 +1184,5 @@ class Lookup(commands.Cog):
             await guild_settings.commit(self.bot.mdb)
 
 
-def setup(bot):
-    bot.add_cog(Lookup(bot))
+async def setup(bot):
+    await bot.add_cog(Lookup(bot))

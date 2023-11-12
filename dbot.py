@@ -113,7 +113,7 @@ class Avrae(commands.AutoShardedBot):
         self.glclient.init()
 
         for cog in COGS:
-            self.load_extension(cog)
+            await self.load_extension(cog)
 
         await compendium.reload_task(bot.mdb)
 

@@ -65,5 +65,5 @@ class Publicity(commands.Cog):
         )
 
 
-def setup(bot):
-    bot.add_cog(Publicity(bot))
+async def setup(bot):
+    await bot.add_cog(Publicity(bot))

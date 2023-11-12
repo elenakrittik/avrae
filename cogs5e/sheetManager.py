@@ -880,5 +880,5 @@ async def send_ddb_ctas(ctx, character):
     await ctx.bot.rdb.setex(f"cog.sheetmanager.cta.seen.{ctx.author.id}", str(time.time()), 60 * 60 * 24 * 7)
 
 
-def setup(bot):
-    bot.add_cog(SheetManager(bot))
+async def setup(bot):
+    await bot.add_cog(SheetManager(bot))

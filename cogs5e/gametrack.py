@@ -847,5 +847,5 @@ class GameTrack(commands.Cog):
             await gamelog.send_automation(ctx, char, spell.name, result.automation_result)
 
 
-def setup(bot):
-    bot.add_cog(GameTrack(bot))
+async def setup(bot):
+    await bot.add_cog(GameTrack(bot))

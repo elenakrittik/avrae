@@ -547,5 +547,5 @@ def cleanup_code(content):
 
 
 # ==== setup ====
-def setup(bot):
-    bot.add_cog(AdminUtils(bot))
+async def setup(bot):
+    await bot.add_cog(AdminUtils(bot))

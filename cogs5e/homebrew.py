@@ -452,5 +452,5 @@ async def can_edit_editor(container, ctx, user):
     )
 
 
-def setup(bot):
-    bot.add_cog(Homebrew(bot))
+async def setup(bot):
+    await bot.add_cog(Homebrew(bot))

@@ -1133,5 +1133,5 @@ async def send_long_code_text(
         await destination.send("This output is too large.")
 
 
-def setup(bot):
-    bot.add_cog(Customization(bot))
+async def setup(bot):
+    await bot.add_cog(Customization(bot))

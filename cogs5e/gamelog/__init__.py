@@ -7,6 +7,6 @@ def _create_event_handlers(bot):
     return (DiceHandler(bot), CharacterHandler(bot))
 
 
-def setup(bot):
+async def setup(bot):
     event_handlers = _create_event_handlers(bot)
-    bot.add_cog(GameLog(bot, event_handlers))
+    await bot.add_cog(GameLog(bot, event_handlers))

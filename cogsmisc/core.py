@@ -220,5 +220,5 @@ class Core(commands.Cog):
         )
 
 
-def setup(bot):
-    bot.add_cog(Core(bot))
+async def setup(bot):
+    await bot.add_cog(Core(bot))

@@ -310,7 +310,7 @@ class Tutorials(commands.Cog):
 
 
 # discord ext boilerplate
-def setup(bot):
+async def setup(bot):
     cog = Tutorials(bot)
-    bot.add_cog(cog)
+    await bot.add_cog(cog)
     bot.help_command.cog = cog

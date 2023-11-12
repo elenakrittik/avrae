@@ -11,5 +11,5 @@ pass  # don't move my imports, pycharm - the cog has to be imported last
 from .cog import InitTracker  # noqa E402
 
 
-def setup(bot):
-    bot.add_cog(InitTracker(bot))
+async def setup(bot):
+    await bot.add_cog(InitTracker(bot))

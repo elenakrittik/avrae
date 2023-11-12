@@ -464,5 +464,5 @@ class CharGenerator(commands.Cog):
         return name
 
 
-def setup(bot):
-    bot.add_cog(CharGenerator(bot))
+async def setup(bot):
+    await bot.add_cog(CharGenerator(bot))
